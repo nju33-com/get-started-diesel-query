@@ -1,0 +1,19 @@
+[package]
+name = "ecogreen-slack"
+version = "0.1.0"
+edition = "2018"
+
+[workspace]
+members = [
+  "gateway-db",
+  "gateway-web"
+]
+
+[dependencies]
+gateway-db = { path = "./gateway-db" }
+gateway-web = { path = "./gateway-web" }
+diesel = { version = "1.4.4", features = [ "postgres" ] }
+anyhow = "1.0.28"
+reqwest = { version = "0.10", features = ["json"] }
+tokio = { version = "0.2", features = ["full"] }
+

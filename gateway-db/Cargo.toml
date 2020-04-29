@@ -1,0 +1,9 @@
+[package]
+name = "gateway-db"
+version = "0.1.0"
+edition = "2018"
+
+[dependencies]
+diesel = { version = "1.4.4", features = [ "postgres" ] }
+anyhow = "1.0.28"
+thiserror = "1.0.15"

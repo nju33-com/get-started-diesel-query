@@ -1,0 +1,26 @@
+name: 'Reset TT By Track Number'
+
+on:
+  repository_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          curl \
+            -XPOST \
+            -H 'Content-Type: application/json' \
+            -H "Authorization: Bearer ${{ github.event.client_payload.slack_token }}" \
+            -d '{"channel": "${{ github.event.client_payload.channel_id }}", "text": "🏃 削除しています"}' \
+            https://slack.com/api/chat.postMessage
+      - run: cargo run -p ecogreen-slack -- ${{ secrets.CONNECTION_STRING }} ${{ github.event.client_payload.track_number }}
+      - run: |
+          curl \
+            -XPOST \
+            -H 'Content-Type: application/json' \
+            -H "Authorization: Bearer ${{ github.event.client_payload.slack_token }}" \
+            -d '{"channel": "${{ github.event.client_payload.channel_id }}", "text": "✅ 削除が完了しました"}' \
+            https://slack.com/api/chat.postMessage

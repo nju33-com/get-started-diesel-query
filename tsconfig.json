@@ -1,0 +1,3 @@
+{
+  "extends": "@geekcojp/devcontainer-config/tsconfig.json"
+}
